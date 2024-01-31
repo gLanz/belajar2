@@ -132,16 +132,38 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="<?=base_url()?>admin" class="nav-link">
               <i class="nav-icon far fa-circle"></i>
               <p class="text">Admin</p>
+            </a>
+          </li>     
+
+
+          <li class="nav-item">
+            <a href="<?=base_url()?>petugas" class="nav-link">
+              <i class="nav-icon far fa-circle"></i>
+              <p class="text">Petugas</p>
             </a>
           </li>          
 
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-circle"></i>
-              <p class="text">Pasien</p>
+              <p class="text">Pendaftaran Pasien</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon far fa-circle"></i>
+              <p class="text">Pemeriksaan</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon far fa-circle"></i>
+              <p class="text">Laporan</p>
             </a>
           </li>
           
