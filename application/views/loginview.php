@@ -22,9 +22,9 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Silakan login untuk masuk ke sistem</p>
 
-      <form action="<?=base_url()?>login/submitlogin" method="post">
+      <form action="<?=base_url()?>login/proseslogin" method="post">
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email">
+          <input type="text" name="username" class="form-control" placeholder="Ketikkan username">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -32,7 +32,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="password" name="password" class="form-control" placeholder="Password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -51,7 +51,14 @@
         </div>
       </form>
  
- 
+      <div class="col-12">
+        <?php if($this->session->flashdata('message_error')): ?>
+          <div class="invalid-feedback">
+            <?=$this->session->flashdata('message_error');?>
+          </div>
+        <?php endif ?>
+      </div>
+
     </div>
     <!-- /.login-card-body -->
   </div>
