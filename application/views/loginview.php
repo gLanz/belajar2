@@ -53,8 +53,8 @@
  
       <div class="col-12">
         <?php if($this->session->flashdata('message_error')): ?>
-          <div class="invalid-feedback">
-            <?=$this->session->flashdata('message_error');?>
+          <div class="text-danger">
+            <?=$this->session->userdata('message_error');?> 
           </div>
         <?php endif ?>
       </div>

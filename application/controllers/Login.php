@@ -23,10 +23,15 @@ class Login extends CI_Controller {
 				'status' => TRUE
 			);
 			$this->session->set_userdata($arrsession);
-			redirect('admin');
+			redirect('home');
 		}else{
 			$this->session->set_flashdata('message_error','Login Gagal silakan cek field isian');
-			$this->load->view('login');
+			redirect('login');
 		}
+	}
+
+	public function logout(){
+		$this->session->sess_destroy();
+		redirect('login');
 	}
 }
