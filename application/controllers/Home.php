@@ -10,8 +10,12 @@ class Home extends CI_Controller {
 		if ($this->session->userdata('status') == FALSE && $this->session->userdata('idsession') == "") {
 		    redirect("login");
 		}
-		
-		$this->load->view('homeview.php');
+		$data['title'] = "Dashboard";
+		$data['menu'] = "dashboard";
+		$data['rowbalita'] = $this->db->query("SELECT *FROM tbl_balita")->num_rows();
+		$data['rowpetugas'] = $this->db->query("SELECT *FROM tbl_petugas")->num_rows();
+		$data['rowdokter'] = $this->db->query("SELECT *FROM tbl_dokter")->num_rows();
+		$this->load->view('home_view.php',$data);
 	}
 
 	function berita(){

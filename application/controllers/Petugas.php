@@ -4,10 +4,14 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Petugas extends CI_Controller {
+
 	public function index(){
 		if ($this->session->userdata('status') == FALSE && $this->session->userdata('idsession') == "") {
 		    redirect("login");
 		}
+
+		$data['title'] = "Petugas";
+		$data['menu'] = "petugas";
 
 		$query = $this->db->query("SELECT a.*, b.username FROM tbl_petugas a LEFT JOIN tbl_login b ON a.id_login=b.id_login")->result();
 		$data['query'] = $query;
@@ -15,30 +19,32 @@ class Petugas extends CI_Controller {
 		$this->load->view('petugas_view.php',$data);
 	}
 
-	public function tambah()
-	{
+	public function tambah(){
 		if ($this->session->userdata('status') == FALSE && $this->session->userdata('idsession') == "") {
 		    redirect("login");
 		}
 
-		$this->load->view('petugas_tambah_view.php',@$data);
+		$data['title'] = "Petugas";
+		$data['menu'] = "petugas";
+
+		$this->load->view('petugas_view_tambah.php',@$data);
 	}
 
-	public function edit()
-	{
+	public function edit(){
 		if ($this->session->userdata('status') == FALSE && $this->session->userdata('idsession') == "") {
 		    redirect("login");
 		}
+
+		$data['title'] = "Petugas";
+		$data['menu'] = "petugas";
 
 		$kode = $this->input->get('kode');
 		$rowpetugas = $this->db->query("SELECT a.*, b.username, b.password FROM tbl_petugas a LEFT JOIN tbl_login b ON a.id_login=b.id_login WHERE a.id_petugas='$kode'")->row();
 		
 		$data['row'] = $rowpetugas;
  
-		$this->load->view('petugas_edit_view.php',$data);
+		$this->load->view('petugas_view_edit.php',$data);
 	}
-
-
 
  	public function prosestambah(){
 		$nama = $this->input->post('nama');
@@ -59,7 +65,8 @@ class Petugas extends CI_Controller {
 	    	$datalogin = array(
 	    		'nama' =>$nama,
 	    		'username' => $username,
-	    		'password' => sha1($password)
+	    		'password' => sha1($password),
+	    		'group' => '3',
 	    	);
 	    	$this->db->insert("tbl_login",$datalogin);
         	$idlogin = $this->db->insert_id(); 
@@ -67,7 +74,7 @@ class Petugas extends CI_Controller {
 
 
 	    	$datapetugas = array(
-	    		'nama' => $nama,
+	    		'nama_petugas' => $nama,
 	    		'jabatan' => $jabatan, 
 	    		'jenis_kelamin' => $jk,
  	    		'id_login' => $idlogin
@@ -76,7 +83,7 @@ class Petugas extends CI_Controller {
 	    	$this->db->insert("tbl_petugas",$datapetugas);
         	$idpasien = $this->db->insert_id(); 
 
-	    	$this->session->set_flashdata('message_sukses','Pasien berhasil ditambah');
+	    	$this->session->set_flashdata('message_sukses','Petugas berhasil ditambah');
 			redirect('petugas');
 		}else{
 			$err_msg = validation_errors();
@@ -106,6 +113,7 @@ class Petugas extends CI_Controller {
 	    	$datalogin = array(
 	    		'nama' =>$nama,
 	    		'username' => $username, 
+	    		'group' => '2',
 	    	);
 
 	    	if($old_password!=$password){
@@ -113,23 +121,21 @@ class Petugas extends CI_Controller {
 	    	}
 	    	$this->db->where(array('id_login'=>$idlogin));
 	    	$this->db->update("tbl_login",$datalogin); 
-
-        	
-
+ 
 	    	$datapetugas = array(
-	    		'nama' => $nama,
+	    		'nama_petugas' => $nama,
 	    		'jabatan' => $jabatan, 
 	    		'jenis_kelamin' => $jk,
 	    	);
 	    	$this->db->where(array('id_petugas'=>$idpetugas));
 	    	$this->db->update("tbl_petugas",$datapetugas);
  
-	    	$this->session->set_flashdata('message_sukses','Pasien berhasil diperbaharui');
+	    	$this->session->set_flashdata('message_sukses','Petugas berhasil diperbaharui');
 			redirect('petugas');
 		}else{
 			$err_msg = validation_errors();
 			$this->session->set_flashdata('message_error','Petugas Gagal diperbaharui, silakan cek field isian'.$err_msg);
-			redirect('petugas/edit');
+			redirect('petugas/edit/?kode='.$idpetugas);
 		}
 	}
 
@@ -137,15 +143,18 @@ class Petugas extends CI_Controller {
 		$kode = $this->input->get('kode');
 		$kode2 = $this->input->get('kode2');
 
-		$this->db->where(array('id_petugas'=>$kode));
-        $this->db->delete('tbl_petugas');
-
+		//hapus dari tabel login
         $this->db->where(array('id_login'=>$kode2));
         $this->db->delete('tbl_login');
+
+        //hapus dari tabel petugas
+       	$this->db->where(array('id_petugas'=>$kode));
+        $this->db->delete('tbl_petugas');
+
+
         if ( $this->db->affected_rows() == 1 ) {
-            $this->session->set_flashdata('message_sukses','Pasien berhasil diperbaharui'); 
-        }else{
-        	$this->session->set_flashdata('message_sukses','Pasien berhasil dihapus');
+            $this->session->set_flashdata('message_sukses','Petugas berhasil dihapus'); 
+        }else{ 
 			$this->session->set_flashdata('message_error','Petugas gagal dihapus');
 		}
 		redirect('petugas');

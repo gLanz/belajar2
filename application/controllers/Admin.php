@@ -9,7 +9,10 @@ class Admin extends CI_Controller {
 		if ($this->session->userdata('status') == FALSE && $this->session->userdata('idsession') == "") {
 		    redirect("login");
 		}
+
+		$data['title'] = "Admin";
+		$data['menu'] = "admin";
 		
-		$this->load->view('adminview.php');
+		$this->load->view('adminview.php',$data);
 	}
 }
