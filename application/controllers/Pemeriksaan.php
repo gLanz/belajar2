@@ -104,7 +104,7 @@ class Pemeriksaan extends CI_Controller {
 				'berat' => $berat,
 				'keluhan' => $keluhan,
 			);
-			$this->session->set_flashdata('message_error','Pendaftaran Gagal, silakan cek field isian'.$err_msg,);
+			$this->session->set_flashdata('message_error','Pendaftaran Gagal, silakan cek field isian'.$err_msg);
 			redirect('pemeriksaan/daftar');
 		}
 	}	
@@ -139,7 +139,7 @@ class Pemeriksaan extends CI_Controller {
 	    	//proses gagal
 			$err_msg = validation_errors();
 		 
-			$this->session->set_flashdata('message_error','Pendaftaran Gagal, silakan cek field isian'.$err_msg,);
+			$this->session->set_flashdata('message_error','Pendaftaran Gagal, silakan cek field isian'.$err_msg);
 			redirect('pemeriksaan/daftar2/?kode='.$iddaftar);
 		}
 
