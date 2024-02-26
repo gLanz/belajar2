@@ -133,7 +133,7 @@ class Pemeriksaan extends CI_Controller {
 	    	$this->db->update("tbl_daftar",$datadaftar);
 
 	    	$this->session->set_flashdata('message_sukses','Pendaftaran antrian berhasil diperbaharui');
-			redirect('pemeriksaan/daftar2');
+			redirect('pemeriksaan/daftarlist');
 
 	    }else{
 	    	//proses gagal

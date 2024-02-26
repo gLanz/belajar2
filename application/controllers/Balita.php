@@ -84,6 +84,7 @@ class Balita extends CI_Controller {
 	    		'alamat' => $var_alamat,
 	    		'nama_ibu' => $var_ibu,
 	    		'nama_ayah' => $var_ayah, 
+	    		'id_login' => $var_idlogin, 
 	    	);
 
 	    	$this->db->insert("tbl_balita",$databalita);

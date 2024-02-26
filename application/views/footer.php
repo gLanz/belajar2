@@ -43,7 +43,7 @@
 <!-- <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script> -->
 <!-- AdminLTE App -->
 <script src="<?=base_url()?>assets/js/adminlte.js"></script>
-<!-- AdminLTE for demo purposes -->
+<script src="<?=base_url()?>assets/summernote/summernote-bs4.min.js"></script>
 <script src="<?=base_url()?>assets/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="<?=base_url()?>assets/js/pages/dashboard.js"></script>
@@ -128,6 +128,12 @@
       autoclose: true,
     });
   });
- </script> 
+
+  $(function () {
+    // Summernote
+    $('.summernote').summernote()
+
+  })
+</script>
 </body>
 </html>

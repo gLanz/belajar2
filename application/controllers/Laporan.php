@@ -50,13 +50,14 @@ class Laporan extends CI_Controller {
 		    redirect("login");
 		}
 
-		$data['title'] = "Laporan data balita di vaksin";
+		
+
+		$d1 = $this->input->get('dt'); 
+		$data['dt'] = $d1;
+		$data['query'] = $this->db->query("SELECT a.*, b.nama_balita, b.jenkel_balita, b.tanggal_lahir, c.nama_vaksin FROM tbl_imunisasi a LEFT JOIN tbl_balita b ON a.id_balita=b.id_balita LEFT JOIN tbl_vaksin c ON a.id_vaksin=c.id_vaksin WHERE DATE_FORMAT(a.tgl_vaksin, '%m-%Y')='$d1'")->result();
+
+		$data['title'] = "Laporan data balita di vaksin ".@$d1;
 		$data['menu'] = "laporan";
-
-		$d1 = $this->input->get('d1');
-		$d2 = $this->input->get('d2');
-		$data['query'] = $this->db->query("SELECT *FROM tbl_balita")->result();
-
 		$this->load->view('laporan_view_vaksinbulanan.php',$data);
 	}
 }

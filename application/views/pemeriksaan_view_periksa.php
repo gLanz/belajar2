@@ -16,12 +16,9 @@
                         <div class="col-12"> 
                             <table class="table table-sm table-striped">
                                 <tr><td colspan="2" class="table-title"><h4>Data Balita</h4></td></tr>
+                                
                                 <tr>
-                                    <th class="w-25">ID</th>
-                                    <th><?=$rowdaftar->id_balita?></th>
-                                </tr>
-                                <tr>
-                                    <th>Nama</th>
+                                    <th style="width:30%;">Nama</th>
                                     <th><?=$rowdaftar->nama_balita?></th> 
                                 </tr>  
                                 <tr>
@@ -38,7 +35,7 @@
                                     <th>Umur</th>
                                     <th><?=getHitungUmur2($rowdaftar->tanggal_lahir)?></th> 
                                 </tr>   
-                                <?php if($rowdaftar->status=='Daftar'){?>
+                                <?php if($rowdaftar->status=='Periksa'){?>
                                 <tr><td colspan="2" class="table-title"><h4>Data Pemeriksaan awal</h4></td></tr>
                                 <tr>
                                     <th>Tinggi Badan</th>

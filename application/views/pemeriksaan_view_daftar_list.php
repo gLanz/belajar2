@@ -54,7 +54,7 @@
                                  
                                 <td>
                                     <?php if($value->status=='Daftar'){?>
-                                        <a href="<?=base_url()?>pemeriksaan/daftar2/?kode=<?=$value->id_balita?>" class="btn btn-primary btn-sm">Buat antrian</a>
+                                        <a href="<?=base_url()?>pemeriksaan/daftar2/?kode=<?=$value->id_daftar?>" class="btn btn-primary btn-sm">Proses antrian</a>
                                     <?php }?>
                                 </td>
                             </tr>

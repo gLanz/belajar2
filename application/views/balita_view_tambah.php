@@ -12,11 +12,11 @@
                         <h3 class="card-title">Tambah balita</h3>
                     </div>
                     <div class="card-body">
-                        <form action="<?=base_url()?>balita/prosestambah" method="post">
+                        <form action="<?=base_url()?>balita/prosestambah" method="post" autocomplete="off">
                             <div class="mb-3 row">
                                 <label for="nama" class="col-sm-2 col-form-label">Nama</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="nama" class="form-control">  
+                                    <input type="text" name="nama" class="form-control" id="nama">  
                                 </div>
                             </div>
 
@@ -71,14 +71,14 @@
                             <div class="mb-3 row">
                                 <label for="username" class="col-sm-2 col-form-label">Username</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="username">
+                                    <input type="text" class="form-control" name="username" id="username" autocomplete="off" value="">
                                 </div>
                             </div>
 
                             <div class="mb-3 row">
                                 <label for="password" class="col-sm-2 col-form-label">Password</label>
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control" name="password">
+                                    <input type="password" class="form-control" name="password" id="password" autocomplete="off" value="">
                                 </div>
                             </div>
 
@@ -101,6 +101,35 @@
     </div>
 </section>
 
+<script>
+    window.addEventListener('DOMContentLoaded', function() {
+        // Hapus nilai input saat halaman dimuat
+        document.getElementById('username').value = '';
+        document.getElementById('password').value = '';
+
+        
+    });
+
+
+    $("#nama").on("keyup", function () {
+      var value = $(this).val();
+          var username = value.replace(/\W+/g, '');
+          username = username.toLowerCase();
+          $("#username").val(username);
+      });
+
+    $(document).on(function(){
+
+        // $("#nama").keyup(function () {
+        //     var value = $(this).val();
+        //       var username = value.replace(/\s+/g, ''); // Menghapus spasi
+        //       username = username.replace(/\W/g, ''); // Menghapus karakter selain huruf dan angka
+        //       $("#username").val(username);
+        // }).keyup();
+
+
+    });
+</script>
 <?php 
     $this->load->view('footer.php'); 
 ?>

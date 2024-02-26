@@ -116,6 +116,13 @@
               <i class="nav-icon fas fa-vial"></i>
               <p class="text">Vaksin</p>
             </a>
+          </li>             
+
+          <li class="nav-item">
+            <a href="<?=base_url()?>jadwal" class="nav-link <?=menuaktif('jadwal',@$menu)?>">  
+              <i class="nav-icon fas fa-calendar-alt"></i>
+              <p class="text">Jadwal</p>
+            </a>
           </li>      
       
           <li class="nav-item">
@@ -154,6 +161,13 @@
             <a href="<?=base_url()?>user/imunisasi" class="nav-link <?=menuaktif('imunisasi',@$menu)?>">  
               <i class="nav-icon  fas fa-syringe"></i>
               <p class="text">Data Imunisasi</p>
+            </a>
+          </li>           
+
+          <li class="nav-item">
+            <a href="<?=base_url()?>user/jadwal" class="nav-link <?=menuaktif('jadwal',@$menu)?>">  
+              <i class="nav-icon  fas fa-calendar-alt"></i>
+              <p class="text">Jadwal Imunisasi</p>
             </a>
           </li> 
 

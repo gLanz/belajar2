@@ -21,7 +21,7 @@
                                             <th>Nama</th>
                                             <th>Jenis Kelamin</th>
                                             <th>Nomor Antri</th>
-                                            <th style="width:15%;" class="text-center">Aksi</th>
+                                            <th style="width:18%;" class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -38,7 +38,7 @@
                                                     <td><?=getJK($resultcari->jenis_kelamin)?></td>
                                                     <td><?=$resultcari->no_antrian?></td>
                                                     <td class="text-center">
-                                                        <a href="<?=base_url()?>pemeriksaan/periksa/?kode=<?=$resultcari->id_daftar?>" class="btn btn-primary btn-sm    "><i class="fas fa-syringe"></i> Imunisasi</a>
+                                                        <a href="<?=base_url()?>pemeriksaan/periksa/?kode=<?=$resultcari->id_daftar?>" class="btn btn-primary btn-sm    "><i class="fas fa-syringe"></i> Proses imunisasi</a>
                                                     </td>
                                                 </tr>
                                             <?php }?>

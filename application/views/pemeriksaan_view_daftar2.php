@@ -23,6 +23,7 @@
 
                         <form action="<?=base_url()?>pemeriksaan/prosesdaftar2" method="post">
                             <input type="hidden" name="iddaftar" value="<?=$row->id_daftar?>">
+                            <input type="hidden" name="idbalita" value="<?=$row->id_balita?>">
                             <div class="mb-2 row">
                                 <label for="nama" class="col-sm-2 col-form-label">Nama Balita</label>
                                 <div class="col-sm-12 col-lg-6">
@@ -67,7 +68,7 @@
                             <div class="mb-3 row">
                                 <label class="col-sm-2 col-form-label">Nomor Antrian</label>
                                 <div class="col-sm-12 col-lg-6">
-                                    <input type="text" class="form-control" name="noantri" value="<?=@$nomorantrian->noantri+1?>" readonly> 
+                                    <input type="text" class="form-control" name="noantri" value="<?=@$row->no_antrian?>" readonly> 
                                 </div>
                             </div>
 

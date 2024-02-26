@@ -25,7 +25,7 @@
             <table class="table table-bordered table-striped mt-3 table-sm" id="dataBasic2">
                   <thead>
                     <tr>
-                      <th style="width: 10px" class="text-center">No</th>
+                      <th style="width: 6%;" class="text-center">No</th>
                       <th>ID Balita</th>
                       <th>Nama</th>
                       <th>Jenis Kelamin</th>

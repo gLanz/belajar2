@@ -20,12 +20,12 @@
                     </div>
                 <?php endif ?>
             </div>
-            <form action="<?=base_url()?>laporan/" autocomplete="off">
+            <form action="<?=base_url()?>laporan/vaksinbulanan" autocomplete="off" method="get">
                 <div class="row">
                     <div class="form-group col-12 col-lg-3">
                         <label>Pilih bulan</label>
                         <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                            <input type="text" class="form-control date-month">
+                            <input type="text" name="dt" class="form-control date-month auto_submit_item" value="<?=@$dt?>" placeholder="pilih bulan dan tahun">
                             <div class="input-group-append">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>
@@ -36,16 +36,17 @@
                     </div>
                 </div>
             </form>
-
+            <?php if($dt!=""){?>
         <table class="table table-bordered table-striped mt-3 table-sm" id="dataBasic">
                   <thead>
                     <tr>
                       <th style="width: 10px" class="text-center">No</th>
-                      <th>ID Balita</th>
+                       
                       <th>Nama</th>
                       <th>Jenis Kelamin</th>
                       <th>Tanggal Lahir</th>
                       <th>Umur</th>
+                      <th>Tanggal Vaksin</th>
                       <th>Vaksin</th>
  
                     </tr>
@@ -56,28 +57,22 @@
                     foreach($query as $rowbalita){
                         $no++;
                         $idbalita = $rowbalita->id_balita;
-                        $vaksin = $this->db->query("SELECT a.id_balita,a.id_vaksin, b.nama_vaksin FROM tbl_imunisasi a LEFT JOIN tbl_vaksin b ON a.id_vaksin=b.id_vaksin WHERE id_balita='$idbalita'")->result();
+                        $nopad =str_pad($idbalita, 4, '0', STR_PAD_LEFT);
+                        //$vaksin = $this->db->query("SELECT a.id_balita,a.id_vaksin, b.nama_vaksin FROM tbl_imunisasi a LEFT JOIN tbl_vaksin b ON a.id_vaksin=b.id_vaksin WHERE id_balita='$idbalita'")->result();
                         ?> 
                     <tr>
-                      <td class="text-center"><?=$no?></td>
-                      <td>#<?=$rowbalita->id_balita?></td>
-                      <td><?=$rowbalita->nama_balita?></td>
+                      <td class="text-center"><?=$no?></td> 
+                      <td>#<?=$nopad?><br><?=$rowbalita->nama_balita?></td>
                       <td><?=getJK($rowbalita->jenkel_balita)?></td>
                       <td><?=tglIndo($rowbalita->tanggal_lahir)?></td>
                       <td><?=getHitungUmur2($rowbalita->tanggal_lahir)?></td>
-                      <td>
-                        <?php foreach($vaksin as $rv){?>
-                            - <?=$rv->nama_vaksin?><br>
-                        <?php } ?>
-                      </td> 
-
-                      
-                    </tr>
-
+                      <td><?=tglIndo($rowbalita->tgl_vaksin)?></td>
+                      <td><?=$rowbalita->nama_vaksin?></td>
+                    </tr> 
                     <?php }?>
                 </tbody>
             </table>
-              
+              <?php }?>
                     </div>
                 </div>
             </div>

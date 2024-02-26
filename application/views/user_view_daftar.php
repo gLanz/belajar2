@@ -26,7 +26,7 @@
                             <div class="mb-3 row">
                                 <label class="col-sm-2 col-form-label">Tanggal Daftar</label>
                                 <div class="col-sm-12 col-lg-6">
-                                    <input type="date" class="form-control" name="tgldaftar">
+                                    <input type="date" class="form-control" name="tgldaftar" id="tgldaftar">
                                 </div>
                             </div>
 
@@ -37,7 +37,13 @@
                                 </div>
                             </div>
 
-                            
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">Nomor Antrian</label>
+                                <div class="col-sm-12 col-lg-6">
+                                    <input type="text" class="form-control" name="noantri" id="noantri" readonly> 
+                                </div>
+                            </div>
+
                             <div class="mb-3 row">
                                 <button type="submit" class="btn btn-primary">Daftar</button> 
                             </div>
@@ -45,11 +51,12 @@
 
                         
                         <h5>Riwayat Pendaftaran Imunisasi</h5>
-                        <table class="table table-bordered table-striped table-sm" id="dataBasic">
+                        <table class="table table-bordered table-striped table-sm" id="dataBasic2">
                           <thead>
                             <tr>
-                              <th style="width: 5%" class="text-center">No</th>
+                              <th style="width: 7%" class="text-center">No</th>
                               <th>Tanggal Daftar</th>
+                              <th class="text-center">No Antrian</th>
                               <th style="width:20%;" class="text-center">Status</th>
                               <th style="width:15%;" class="text-center">Aksi</th>
 
@@ -64,6 +71,7 @@
                             <tr>
                               <td class="text-center"><?=$no?></td> 
                               <td><?=tglIndo($rdaftar->tgl_daftar)?></td> 
+                              <td class="text-center"><?=$rdaftar->no_antrian?></td>  
                               <td class="text-center"><?=$rdaftar->status?></td>  
                               <td class="text-center">
                                 <?php if($rdaftar->status!='Batal'){?>
@@ -87,6 +95,19 @@
         height: auto!important;
     }
 </style>
+<script>
+    $("#tgldaftar").on("change",function() {
+        var dt = $(this).val();
+        $.ajax({
+            url : "<?php echo site_url('user/getAntrian')?>/?dt="+ dt,
+            type: "GET",
+            dataType: "JSON",
+            success: function(data){ 
+                $('#noantri').val(data);
+            }
+        });
+    });
+</script>
 <?php 
     $this->load->view('footer.php'); 
 ?>
