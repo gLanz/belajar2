@@ -13,6 +13,7 @@
                     </div>
                     <div class="card-body">
                         <form action="<?=base_url()?>dokter/prosesedit" method="post">
+                            <input type="hidden" name="iddokter" value="<?=$row->id_dokter?>">
                             <div class="mb-3 row">
                                 <label for="nama" class="col-sm-2 col-form-label">Nama</label>
                                 <div class="col-sm-10">

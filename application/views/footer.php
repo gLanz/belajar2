@@ -133,7 +133,9 @@
     // Summernote
     $('.summernote').summernote()
 
-  })
+  });
+
+  
 </script>
 </body>
 </html>
