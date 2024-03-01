@@ -13,6 +13,7 @@
                     </div>
                     <div class="card-body">
                         <form action="<?=base_url()?>jadwal/prosesedit" method="post">
+                            <input type="hidden" value="<?=$row->id_jadwal?>" name="idjadwal">
 
                             <div class="mb-2 row">
                                 <label class="col-sm-12 col-form-label">Dokter</label>
