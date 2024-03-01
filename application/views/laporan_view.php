@@ -29,7 +29,7 @@
             <a href="<?=base_url()?>laporan/balitavaksin" class="btn btn-default btn-block text-left pl-3">
                 <i class="fas fa-chart-bar"></i> Laporan Data Vaksin Balita
             </a>
-            <a href="<?=base_url()?>laporan/vaksinbulanan" class="btn btn-default btn-block text-left pl-3 d-none">
+            <a href="<?=base_url()?>laporan/vaksinbulanan" class="btn btn-default btn-block text-left pl-3">
                 <i class="fas fa-chart-bar"></i> Laporan Data Balita di Vaksin Bulanan
             </a>
 
