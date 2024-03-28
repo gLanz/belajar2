@@ -71,14 +71,14 @@
                             <div class="mb-3 row">
                                 <label for="username" class="col-sm-2 col-form-label">Username</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="username" id="username" autocomplete="off" value="">
+                                    <input type="text" class="form-control" name="username" id="username" autocomplete="new-username" value="">
                                 </div>
                             </div>
 
                             <div class="mb-3 row">
                                 <label for="password" class="col-sm-2 col-form-label">Password</label>
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control" name="password" id="password" autocomplete="off" value="">
+                                    <input type="password" class="form-control" name="password" id="password" autocomplete="new-password" value="">
                                 </div>
                             </div>
 
@@ -89,7 +89,7 @@
 
                         <div class="col-12">
                             <?php if($this->session->flashdata('message_error')): ?>
-                                <div class="text-danger">
+                                <div class="alert alert-danger">
                                     <?=$this->session->userdata('message_error');?> 
                                 </div>
                             <?php endif ?>

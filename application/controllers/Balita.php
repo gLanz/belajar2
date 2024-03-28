@@ -65,36 +65,42 @@ class Balita extends CI_Controller {
 	    $this->form_validation->set_rules('password', 'Password', 'trim|required');
 
 	    if ($this->form_validation->run() === TRUE){
-	    	
-	    	$datalogin = array(
-	    		'username' => $var_username,
-	    		'password' => sha1($var_password),
-	    		'nama' => $var_nama,
-	    		'group' => '3',
-	    	);
-	    	$this->db->insert('tbl_login',$datalogin);
-	    	$var_idlogin = $this->db->insert_id();
 
-	    	
-	    	$databalita = array(
-	    		'nama_balita' => $var_nama,
-	    		'tanggal_lahir' => $var_tgllahir,
-	    		'no_hp' => $var_hp,
-	    		'jenkel_balita' => $var_jk,
-	    		'alamat' => $var_alamat,
-	    		'nama_ibu' => $var_ibu,
-	    		'nama_ayah' => $var_ayah, 
-	    		'id_login' => $var_idlogin, 
-	    	);
+	    	$cekusername = $this->db->query("SELECT * FROM tbl_login WHERE username='$username'")->num_rows();
+	    	if($cekusername > 0){
+	    		$this->session->set_flashdata('message_error','Balita gagal ditambah, Username telah digunakan silakan gunakan username lain');
+				redirect('balita/tambah');
+	    	}else{
+		    	$datalogin = array(
+		    		'username' => $var_username,
+		    		'password' => sha1($var_password),
+		    		'nama' => $var_nama,
+		    		'group' => '3',
+		    	);
+		    	$this->db->insert('tbl_login',$datalogin);
+		    	$var_idlogin = $this->db->insert_id();
 
-	    	$this->db->insert("tbl_balita",$databalita);
-        	$idbalita = $this->db->insert_id();
+		    	
+		    	$databalita = array(
+		    		'nama_balita' => $var_nama,
+		    		'tanggal_lahir' => $var_tgllahir,
+		    		'no_hp' => $var_hp,
+		    		'jenkel_balita' => $var_jk,
+		    		'alamat' => $var_alamat,
+		    		'nama_ibu' => $var_ibu,
+		    		'nama_ayah' => $var_ayah, 
+		    		'id_login' => $var_idlogin, 
+		    	);
 
-	    
+		    	$this->db->insert("tbl_balita",$databalita);
+	        	$idbalita = $this->db->insert_id();
+
+		    
 
 
-	    	$this->session->set_flashdata('message_sukses','balita berhasil ditambah');
-			redirect('balita');
+		    	$this->session->set_flashdata('message_sukses','balita berhasil ditambah');
+				redirect('balita');
+			}
 		}else{
 			$err_msg = validation_errors();
 			$this->session->set_flashdata('message_error','balita Gagal ditambah, silakan cek field isian'.$err_msg);
@@ -174,25 +180,22 @@ class Balita extends CI_Controller {
 		$kode = $this->input->get('kode');
 		$kode2 = $this->input->get('kode2');
 
-		//hapus dari tabel login
-		$this->db->where(array('id_login'=>$kode2));
-        $this->db->delete('tbl_login');
-
-		//hapus dati tabel balita
+		//hapus dari tabel balita
 		$this->db->where(array('id_balita'=>$kode));
         $this->db->delete('tbl_balita');
 
-		//hapus dati tabel daftar
+		//hapus dari tabel login
+		$this->db->where(array('id_login'=>$kode2));
+        $this->db->delete('tbl_login'); 
+
+		//hapus dari tabel daftar
 		$this->db->where(array('id_balita'=>$kode));
         $this->db->delete('tbl_daftar');
 
-		//hapus dati tabel daftar
+		//hapus dari tabel daftar
 		$this->db->where(array('id_balita'=>$kode));
         $this->db->delete('tbl_imunisasi');
-
-
-
-
+ 
         if ( $this->db->affected_rows() == 1 ) {
             $this->session->set_flashdata('message_sukses','balita berhasil diperbaharui'); 
         }else{ 

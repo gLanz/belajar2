@@ -115,7 +115,7 @@ class Dokter extends CI_Controller {
  			$this->session->set_flashdata('message_error','Dokter tidak dapat dihapus karena masih memiliki relasi dengan tabel lain');
  		}else{
 
-	        //hapus dari tabel petugas
+	        //hapus dari tabel dokter
 	       	$this->db->where(array('id_dokter'=>$kode));
 	        $this->db->delete('tbl_dokter');
 

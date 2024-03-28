@@ -61,30 +61,37 @@ class Petugas extends CI_Controller {
 	    $this->form_validation->set_rules('password', 'Password', 'trim|required');
 
 	    if ($this->form_validation->run() === TRUE){
+
+	    	$cekusername = $this->db->query("SELECT * FROM tbl_login WHERE username='$username'")->num_rows();
+	    	if($cekusername > 0){
+	    		$this->session->set_flashdata('message_error','Petugas Gagal ditambah, Username telah digunakan silakan gunakan username lain');
+				redirect('petugas/tambah');
+	    	}else{
 	    	 
-	    	$datalogin = array(
-	    		'nama' =>$nama,
-	    		'username' => $username,
-	    		'password' => sha1($password),
-	    		'group' => '3',
-	    	);
-	    	$this->db->insert("tbl_login",$datalogin);
-        	$idlogin = $this->db->insert_id(); 
+		    	$datalogin = array(
+		    		'nama' =>$nama,
+		    		'username' => $username,
+		    		'password' => sha1($password),
+		    		'group'=>'3'
+		    	);
+		    	$this->db->insert("tbl_login",$datalogin);
+	        	$idlogin = $this->db->insert_id(); 
 
 
 
-	    	$datapetugas = array(
-	    		'nama_petugas' => $nama,
-	    		'jabatan' => $jabatan, 
-	    		'jenis_kelamin' => $jk,
- 	    		'id_login' => $idlogin
-	    	);
+		    	$datapetugas = array(
+		    		'nama_petugas' => $nama,
+		    		'jabatan' => $jabatan, 
+		    		'jenis_kelamin' => $jk,
+	 	    		'id_login' => $idlogin
+		    	);
 
-	    	$this->db->insert("tbl_petugas",$datapetugas);
-        	$idpasien = $this->db->insert_id(); 
+		    	$this->db->insert("tbl_petugas",$datapetugas);
+	        	$idpasien = $this->db->insert_id(); 
 
-	    	$this->session->set_flashdata('message_sukses','Petugas berhasil ditambah');
-			redirect('petugas');
+		    	$this->session->set_flashdata('message_sukses','Petugas berhasil ditambah');
+				redirect('petugas');
+			}
 		}else{
 			$err_msg = validation_errors();
 			$this->session->set_flashdata('message_error','Petugas Gagal ditambah, silakan cek field isian'.$err_msg);
@@ -143,13 +150,15 @@ class Petugas extends CI_Controller {
 		$kode = $this->input->get('kode');
 		$kode2 = $this->input->get('kode2');
 
-		//hapus dari tabel login
-        $this->db->where(array('id_login'=>$kode2));
-        $this->db->delete('tbl_login');
+
 
         //hapus dari tabel petugas
        	$this->db->where(array('id_petugas'=>$kode));
         $this->db->delete('tbl_petugas');
+
+        //hapus dari tabel login
+        $this->db->where(array('id_login'=>$kode2));
+        $this->db->delete('tbl_login');
 
 
         if ( $this->db->affected_rows() == 1 ) {
