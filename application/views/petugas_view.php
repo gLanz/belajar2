@@ -23,6 +23,14 @@
                 <?php endif ?>
             </div>
 
+            <div class="my-3">
+                <?php if($this->session->flashdata('message_error')): ?>
+                    <div class="alert alert-success">
+                        <?=$this->session->userdata('message_error');?> 
+                    </div>
+                <?php endif ?>
+            </div>
+
             <table class="table table-bordered table-striped table-sm" id="dataBasic2">
                   <thead>
                     <tr>
